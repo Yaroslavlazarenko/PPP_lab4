@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPP_lab4", "PPP_lab4\PPP_lab4.csproj", "{BFDD445D-594F-4FE5-84A0-5693509D480A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFDD445D-594F-4FE5-84A0-5693509D480A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFDD445D-594F-4FE5-84A0-5693509D480A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFDD445D-594F-4FE5-84A0-5693509D480A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFDD445D-594F-4FE5-84A0-5693509D480A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE7FF01E-64B8-4BBE-B574-F90D48C84786}
+	EndGlobalSection
+EndGlobal
