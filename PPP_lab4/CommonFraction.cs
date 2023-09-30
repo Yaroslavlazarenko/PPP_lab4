@@ -8,15 +8,11 @@
         /// <summary>
         /// Конструктор класса обыкновенной дроби
         /// </summary>
-        /// <param name="top">Числитель</param>
-        /// <param name="bottom">Знаменатель</param>
-        public CommonFraction(int top, int bottom)
+        /// <param name="numerator">Числитель</param>
+        /// <param name="denominator">Знаменатель</param>
+        public CommonFraction(int numerator, int denominator)
         {
-            (_numerator, _denominator) = bottom < 0 ? (-top, -bottom) : (top, bottom == 0 ? 1 : bottom);
-            if (bottom == 0)
-            {
-                Console.WriteLine("Делить на ноль нельзя, поэтому знаменатель заменен на 1.");
-            }
+            (_numerator, _denominator) = denominator < 0 ? (-numerator, -denominator) : (numerator, denominator == 0 ? 1 : denominator);
         }
 
         /// <summary>
@@ -40,8 +36,8 @@
                 newDenominator = left._denominator * right._denominator;
             }
 
-            int gcd = greatestCommonDivisor(newNumerator, newDenominator);
-            return new CommonFraction(newNumerator / gcd, newDenominator / gcd);
+            int greatestCommonDivisor = GreatestCommonDivisor(newNumerator, newDenominator);
+            return new CommonFraction(newNumerator / greatestCommonDivisor, newDenominator / greatestCommonDivisor);
         }
 
         /// <summary>
@@ -65,8 +61,8 @@
         {
             int newNumerator = left._numerator * right._numerator;
             int newDenominator = left._denominator * right._denominator;
-            int gcd = greatestCommonDivisor(newNumerator, newDenominator);
-            return new CommonFraction(newNumerator / gcd, newDenominator / gcd);
+            int greatestCommonDivisor = GreatestCommonDivisor(newNumerator, newDenominator);
+            return new CommonFraction(newNumerator / greatestCommonDivisor, newDenominator / greatestCommonDivisor);
         }
 
         /// <summary>
@@ -85,7 +81,7 @@
         /// <param name="top">Первое число</param>
         /// <param name="bottom">Второе число</param>
         /// <returns>Наибольший делитель</returns>
-        private static int greatestCommonDivisor(int top, int bottom)
+        private static int GreatestCommonDivisor(int top, int bottom)
         {
             int temp;
             while (bottom != 0)
