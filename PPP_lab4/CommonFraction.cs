@@ -14,6 +14,8 @@
         {
             (_numerator, _denominator) = denominator < 0 ? (-numerator, -denominator) : (numerator, denominator == 0 ? 1 : denominator);
         }
+        //Если при создании класса обыкновенной дроби ввести знаменатель равный нулю то он будет заменён на 1.
+
 
         /// <summary>
         /// Вычисление суммы двух чисел
