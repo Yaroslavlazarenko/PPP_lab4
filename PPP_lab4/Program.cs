@@ -13,7 +13,7 @@
             CommonFraction R = (firstCommonFraction + secondCommonFraction) * (firstCommonFraction - thirdCommonFraction);
 
             Console.WriteLine($"R:\n{R}");
-            Console.WriteLine($"\n1/R:\n{CommonFraction.inverseCommonFraction(R)}");
+            Console.WriteLine($"\n1/R:\n{CommonFraction.InverseCommonFraction(R)}");
         }
     }
 }
