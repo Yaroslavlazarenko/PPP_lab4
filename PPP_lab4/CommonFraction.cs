@@ -2,8 +2,8 @@
 {
     public class CommonFraction
     {
-        private int numerator;
-        private int denominator;
+        private int _numerator;
+        private int _denominator;
         
         /// <summary>
         /// Конструктор класса обыкновенной дроби
@@ -12,7 +12,7 @@
         /// <param name="bottom">Знаменатель</param>
         public CommonFraction(int top, int bottom)
         {
-            (numerator, denominator) = bottom < 0 ? (-top, -bottom) : (top, bottom == 0 ? 1 : bottom);
+            (_numerator, _denominator) = bottom < 0 ? (-top, -bottom) : (top, bottom == 0 ? 1 : bottom);
             if (bottom == 0)
             {
                 Console.WriteLine("Делить на ноль нельзя, поэтому знаменатель заменен на 1.");
@@ -29,15 +29,15 @@
         {
             int newNumerator, newDenominator;
 
-            if (left.denominator == right.denominator)
+            if (left._denominator == right._denominator)
             {
-                newNumerator = left.numerator + right.numerator;
-                newDenominator = left.denominator;
+                newNumerator = left._numerator + right._numerator;
+                newDenominator = left._denominator;
             }
             else
             {
-                newNumerator = left.numerator * right.denominator + right.numerator * left.denominator;
-                newDenominator = left.denominator * right.denominator;
+                newNumerator = left._numerator * right._denominator + right._numerator * left._denominator;
+                newDenominator = left._denominator * right._denominator;
             }
 
             int gcd = greatestCommonDivisor(newNumerator, newDenominator);
@@ -52,7 +52,7 @@
         /// <returns>Разность в виде обыкновенной дроби</returns>
         public static CommonFraction operator -(CommonFraction left, CommonFraction right)
         {
-            return left + new CommonFraction(-right.numerator, right.denominator);
+            return left + new CommonFraction(-right._numerator, right._denominator);
         }
 
         /// <summary>
@@ -63,8 +63,8 @@
         /// <returns>Произведение в виде обыкновенной дроби</returns>
         public static CommonFraction operator *(CommonFraction left, CommonFraction right)
         {
-            int newNumerator = left.numerator * right.numerator;
-            int newDenominator = left.denominator * right.denominator;
+            int newNumerator = left._numerator * right._numerator;
+            int newDenominator = left._denominator * right._denominator;
             int gcd = greatestCommonDivisor(newNumerator, newDenominator);
             return new CommonFraction(newNumerator / gcd, newDenominator / gcd);
         }
@@ -76,7 +76,7 @@
         /// <returns>Обратная обыкновенная дробь</returns>
         public static CommonFraction InverseCommonFraction(CommonFraction commonFraction)
         {
-            return new CommonFraction(commonFraction.denominator, commonFraction.numerator);
+            return new CommonFraction(commonFraction._denominator, commonFraction._numerator);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@
 
         public override string ToString()
         {
-            return $"{numerator}\n{new string('-', Math.Max(Math.Abs(numerator < 0 ? numerator*10 : numerator), denominator).ToString().Length)}\n{denominator}";
+            return $"{_numerator}\n{new string('-', Math.Max(Math.Abs(_numerator < 0 ? _numerator*10 : _numerator), _denominator).ToString().Length)}\n{_denominator}";
         }
     }
 }
