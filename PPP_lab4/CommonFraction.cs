@@ -4,7 +4,38 @@
     {
         private int _numerator;
         private int _denominator;
-        
+
+        public int Numerator 
+        { 
+            get => _numerator;
+            set => _numerator = value;
+        }
+
+        public int Denominator
+        {
+            get => _denominator;
+            set 
+            { 
+                if(value < 0)
+                {
+                    _numerator = -_numerator;
+                    _denominator = -value;
+                }
+                else if (value == 0)
+                {
+                    Random random = new();
+                    do
+                    {
+                        _denominator = random.Next(-100, 101);
+                    } while (_denominator == 0);   
+                }
+                else
+                {
+                    _denominator = value;
+                }
+            }
+        }
+
         /// <summary>
         /// Конструктор класса обыкновенной дроби
         /// </summary>
@@ -12,10 +43,9 @@
         /// <param name="denominator">Знаменатель</param>
         public CommonFraction(int numerator, int denominator)
         {
-            (_numerator, _denominator) = denominator < 0 ? (-numerator, -denominator) : (numerator, denominator == 0 ? 1 : denominator);
+            Numerator = numerator;
+            Denominator = denominator;
         }
-        //Если при создании класса обыкновенной дроби ввести знаменатель равный нулю то он будет заменён на 1.
-
 
         /// <summary>
         /// Вычисление суммы двух чисел
@@ -71,33 +101,40 @@
         /// Получить обратную обыкновенную дробь
         /// </summary>
         /// <param name="commonFraction">Обыкновенная дробь</param>
-        /// <returns>Обратная обыкновенная дробь</returns>
-        public static CommonFraction InverseCommonFraction(CommonFraction commonFraction)
+        /// <returns>Обратная обыкновенная дробь в формате текста</returns>
+        public static string InverseCommonFraction(CommonFraction commonFraction)
         {
-            return new CommonFraction(commonFraction._denominator, commonFraction._numerator);
+            if(commonFraction._numerator != 0)
+            {
+                return $"{new CommonFraction(commonFraction._denominator, commonFraction._numerator)}";
+            }
+            else
+            {
+                return "Нельзя создать обратную дробь, так как числитель равен нулю.";
+            }
         }
 
         /// <summary>
         /// Нахождение наибольшего делителя двух целых чисел
         /// </summary>
-        /// <param name="top">Первое число</param>
-        /// <param name="bottom">Второе число</param>
+        /// <param name="firstNumber">Первое число</param>
+        /// <param name="secondNumber">Второе число</param>
         /// <returns>Наибольший делитель</returns>
-        private static int GreatestCommonDivisor(int top, int bottom)
+        private static int GreatestCommonDivisor(int firstNumber, int secondNumber)
         {
             int temp;
-            while (bottom != 0)
+            while (secondNumber != 0)
             {
-                temp = bottom;
-                bottom = top % bottom;
-                top = temp;
+                temp = secondNumber;
+                secondNumber = firstNumber % secondNumber;
+                firstNumber = temp;
             }
-            return Math.Abs(top);
+            return Math.Abs(firstNumber);
         }
 
         public override string ToString()
         {
-            return $"{_numerator}\n{new string('-', Math.Max(Math.Abs(_numerator < 0 ? _numerator*10 : _numerator), _denominator).ToString().Length)}\n{_denominator}";
+            return $"{_numerator}\n{new string('-', Math.Max(Math.Abs(_numerator < 0 ? _numerator * 10 : _numerator), Denominator).ToString().Length)}\n{Denominator}";
         }
     }
 }
