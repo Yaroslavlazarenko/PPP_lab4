@@ -1,16 +1,24 @@
-﻿namespace PPP_lab4
+﻿using System;
+
+namespace PPP_lab4
 {
     public class CommonFraction
     {
         private int _numerator;
         private int _denominator;
 
+        /// <summary>
+        /// Свойство обеспечивает доступ к значению числителя дроби, а также позволяет изменять это значение
+        /// </summary>
         public int Numerator 
         { 
             get => _numerator;
             set => _numerator = value;
         }
 
+        /// <summary>
+        /// Свойство обеспечивает доступ к значению знаменателя дроби, а также позволяет изменять это значение
+        /// </summary>
         public int Denominator
         {
             get => _denominator;
@@ -23,11 +31,7 @@
                 }
                 else if (value == 0)
                 {
-                    Random random = new();
-                    do
-                    {
-                        _denominator = random.Next(-100, 101);
-                    } while (_denominator == 0);   
+                    throw new ArgumentException("Знаменатель дроби равен нулю");
                 }
                 else
                 {
@@ -55,6 +59,10 @@
         /// <returns>Сумма в виде обыкновеной дроби</returns>
         public static CommonFraction operator +(CommonFraction left, CommonFraction right)
         {
+            if (left == null || right == null)
+            {
+                throw new NullReferenceException("При сложении одна из дробей null");
+            }
             int newNumerator, newDenominator;
 
             if (left._denominator == right._denominator)
@@ -80,6 +88,10 @@
         /// <returns>Разность в виде обыкновенной дроби</returns>
         public static CommonFraction operator -(CommonFraction left, CommonFraction right)
         {
+            if (left == null || right == null)
+            {
+                throw new NullReferenceException("При вычитании одна из дробей null");
+            }
             return left + new CommonFraction(-right._numerator, right._denominator);
         }
 
@@ -91,6 +103,10 @@
         /// <returns>Произведение в виде обыкновенной дроби</returns>
         public static CommonFraction operator *(CommonFraction left, CommonFraction right)
         {
+            if (left == null || right == null)
+            {
+                throw new NullReferenceException("При умножении одна из дробей null");
+            }
             int newNumerator = left._numerator * right._numerator;
             int newDenominator = left._denominator * right._denominator;
             int greatestCommonDivisor = GreatestCommonDivisor(newNumerator, newDenominator);
@@ -102,16 +118,18 @@
         /// </summary>
         /// <param name="commonFraction">Обыкновенная дробь</param>
         /// <returns>Обратная обыкновенная дробь в формате текста</returns>
-        public static string InverseCommonFraction(CommonFraction commonFraction)
+        public static CommonFraction InverseCommonFraction(CommonFraction commonFraction)
         {
-            if(commonFraction._numerator != 0)
+            if (commonFraction == null)
             {
-                return $"{new CommonFraction(commonFraction._denominator, commonFraction._numerator)}";
+                throw new NullReferenceException("Дробь для образования обратной дроби null");
             }
-            else
+            else if (commonFraction.Numerator == 0)
             {
-                return "Нельзя создать обратную дробь, так как числитель равен нулю.";
+                throw new DivideByZeroException("Числитель дроби для образования обратной равен нулю");
             }
+
+            return new CommonFraction(commonFraction._denominator, commonFraction._numerator);
         }
 
         /// <summary>
